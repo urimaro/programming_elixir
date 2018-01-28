@@ -22,3 +22,7 @@ IO.inspect a
 #=> 1
 IO.inspect b
 #=> 3
+
+IO.inspect list = [ 1, 2, 3 ]
+#IO.inspect [ a, 1, b ] = list
+#=> MatchError
