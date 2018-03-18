@@ -10,5 +10,12 @@ defmodule ListsAndRecursion do
       false
     end
   end
+
+  # each
+  def each([], _func), do: :ok
+  def each([head | tail], func) do
+    func.(head)
+    each(tail, func)
+  end
 end
 

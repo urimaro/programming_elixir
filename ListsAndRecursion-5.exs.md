@@ -28,3 +28,27 @@ true
 true
 ```
 
+Enum.each/2
+
+```
+> Enum.each([1, 2, 3], &(IO.puts &1))
+1
+2
+3
+:ok
+> Enum.each([], &(IO.puts &1))
+:ok
+```
+
+ListsAndRecursion.each/2
+
+```
+> ListsAndRecursion.each([1, 2, 3], &(IO.puts &1))
+1
+2
+3
+:ok
+> ListsAndRecursion.each([], &(IO.puts &1))
+:ok
+```
+
