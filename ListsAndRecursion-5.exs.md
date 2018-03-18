@@ -52,3 +52,25 @@ ListsAndRecursion.each/2
 :ok
 ```
 
+Enum.filter/2
+
+```
+> Enum.filter([1, 2, 3], &(rem(&1, 2) == 0))
+[2]
+> Enum.filter([1, 2, 3, 4, 5, 6], &(rem(&1, 2) == 0))
+[2, 4, 6]
+> Enum.filter([], &(rem(&1, 2) == 0))
+[]
+```
+
+ListsAndRecursion.filter/2
+
+```
+> ListsAndRecursion.filter([1, 2, 3], &(rem(&1, 2) == 0))
+[2]
+> ListsAndRecursion.filter([1, 2, 3, 4, 5, 6], &(rem(&1, 2) == 0))
+[2, 4, 6]
+> ListsAndRecursion.filter([], &(rem(&1, 2) == 0))
+[]
+```
+
