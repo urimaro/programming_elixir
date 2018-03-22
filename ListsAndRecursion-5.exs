@@ -27,5 +27,17 @@ defmodule ListsAndRecursion do
       filter(tail, func)
     end
   end
+
+  # split
+  def split(list, count), do: _split(list, [], count)
+
+  defp _split([],   front, _count), do: {Enum.reverse(front), []}
+  defp _split(list, front, 0),      do: {Enum.reverse(front), list}
+  defp _split([head | tail], front, count) when count > 0 do
+    _split(tail, [head | front], count - 1)
+  end
+  defp _split(list, front, count) when count < 0 do
+    _split(list, front, max(0, Enum.count(list) + count))
+  end
 end
 
