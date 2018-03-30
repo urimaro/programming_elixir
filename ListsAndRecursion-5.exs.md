@@ -112,3 +112,50 @@ ListsAndRecursion.split/2
 {[], [1, 2, 3]}
 ```
 
+Enum.take/2
+
+```
+> Enum.take([1, 2, 3], 0)
+[]
+> Enum.take([1, 2, 3], 1)
+[1]
+> Enum.take([1, 2, 3], 2)
+[1, 2]
+> Enum.take([1, 2, 3], 3)
+[1, 2, 3]
+> Enum.take([1, 2, 3], 4)
+[1, 2, 3]
+> Enum.take([1, 2, 3], -1)
+[3]
+> Enum.take([1, 2, 3], -2)
+[2, 3]
+> Enum.take([1, 2, 3], -3)
+[1, 2, 3]
+> Enum.take([1, 2, 3], -4)
+[1, 2, 3]
+> 
+```
+
+ListsAndRecursion.take/2
+
+```
+> ListsAndRecursion.take([1, 2, 3], 0)
+[]
+> ListsAndRecursion.take([1, 2, 3], 1)
+[1]
+> ListsAndRecursion.take([1, 2, 3], 2)
+[1, 2]
+> ListsAndRecursion.take([1, 2, 3], 3)
+[1, 2, 3]
+> ListsAndRecursion.take([1, 2, 3], 4)
+[1, 2, 3]
+> ListsAndRecursion.take([1, 2, 3], -1)
+[3]
+> ListsAndRecursion.take([1, 2, 3], -2)
+[2, 3]
+> ListsAndRecursion.take([1, 2, 3], -3)
+[1, 2, 3]
+> ListsAndRecursion.take([1, 2, 3], -4)
+[1, 2, 3]
+```
+

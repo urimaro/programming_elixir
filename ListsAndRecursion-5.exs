@@ -39,5 +39,9 @@ defmodule ListsAndRecursion do
   defp _split(list, front, count) when count < 0 do
     _split(list, front, max(0, Enum.count(list) + count))
   end
+
+  # take
+  def take(list, count) when count >= 0, do: Enum.split(list, count) |> elem(0)
+  def take(list, count) when count < 0,  do: Enum.split(list, count) |> elem(1)
 end
 
