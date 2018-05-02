@@ -8,3 +8,14 @@ defmodule MyString do
 
   defp _each(nil, _), do: []
 end
+
+defmodule MyString2 do
+  def each(str, func), do: _each(String.next_grapheme(str), func)
+
+  defp _each({grapheme, rest}, func) do
+    func.(grapheme)
+    _each(String.next_grapheme(rest), func)
+  end
+
+  defp _each(nil, _), do: []
+end
