@@ -1,0 +1,7 @@
+GitHubのissuesプロジェクト参照
+https://github.com/urimaro/issues
+
+以下、関係するcommit。
+3d320c79ffac7c17ba950ed7e1a37e0963fe1802
+75848fee56cff024e176ba24a94f7ed9ec78a9bd
+
