@@ -1,0 +1,5 @@
+There is a cat.
+Really? Where?
+Yes, it is the cat of the cats.
+
+cat ./a.txt
