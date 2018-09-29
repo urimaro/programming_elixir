@@ -20,5 +20,25 @@ defmodule Stack.Server do
   def handle_cast({:push, value}, stack) do
     {:noreply, [value | stack]}
   end
+
+  def handle_cast(:stop, state) do
+    {:stop, "That's the stop reason!", state}
+  end
+
+  def handle_cast(:invalid_value, _state) do
+    {}
+  end
+
+  def handle_cast({:halt, value}, _state) do
+    System.halt(value)
+  end
+
+  def handle_cast({:kernel_exit, reason}, _state) do
+    Kernel.exit(reason)
+  end
+
+  def handle_cast({:raise, reason}, _state) do
+    raise reason
+  end
 end
 
