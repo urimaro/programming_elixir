@@ -17,28 +17,63 @@ defmodule Stack.Server do
     {:reply, head, tail}
   end
 
-  def handle_cast({:push, value}, stack) do
-    {:noreply, [value | stack]}
+  def stop do
+    GenServer.cast(__MODULE__, :stop)
   end
 
-  def handle_cast(:stop, state) do
-    {:stop, "That's the stop reason!", state}
+  def invalid_value do
+    GenServer.cast(__MODULE__, :invalid_value)
   end
 
-  def handle_cast(:invalid_value, _state) do
-    {}
+  def halt_0 do
+    GenServer.cast(__MODULE__, {:halt, 0})
   end
 
-  def handle_cast({:halt, value}, _state) do
-    System.halt(value)
+  def halt_1 do
+    GenServer.cast(__MODULE__, {:halt, 1})
   end
 
-  def handle_cast({:kernel_exit, reason}, _state) do
-    Kernel.exit(reason)
+  def halt_abort do
+    GenServer.cast(__MODULE__, {:halt, :abort})
   end
 
-  def handle_cast({:raise, reason}, _state) do
-    raise reason
+  def kernel_exit_normal do
+    GenServer.cast(__MODULE__, {:kernel_exit, :normal})
+  end
+
+  def kernel_exit_shutdown do
+    GenServer.cast(__MODULE__, {:kernel_exit, :shutdown})
+  end
+
+  def kernel_exit_other do
+    GenServer.cast(__MODULE__, {:kernel_exit, "I wanna exit Kernel!"})
+  end
+
+  def raise do
+    GenServer.cast(__MODULE__, {:raise, "I've raised!"})
+  end
+
+  def handle_cast(request, state) do
+    case request do
+      request when is_atom(request) and request == :stop ->
+        {:stop, "That's the stop reason!", state}
+      request when is_atom(request) and request == :invalid_value ->
+        {}
+      {id, value} when id == :halt ->
+        System.halt(value)
+      {id, value} when id == :kernel_exit ->
+        Kernel.exit(value)
+      {id, value} when id == :raise ->
+        raise value
+      {id, value} when id == :push ->
+        {:noreply, [value | state]}
+    end
+  end
+
+  def terminate(reason, state) do
+    IO.puts "Here is the terminate callback!"
+    IO.puts "Reason: #{inspect reason}"
+    IO.puts "State: #{inspect state}"
   end
 end
 
