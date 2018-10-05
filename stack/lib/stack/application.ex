@@ -5,12 +5,7 @@ defmodule Stack.Application do
 
   # args: list
   def start(_type, args) do
-    children = [
-      {Stack.Server, args}
-    ]
-
-    opts = [strategy: :one_for_one, name: Stack.Supervisor]
-    Supervisor.start_link(children, opts)
+    {:ok, _pid} = Stack.Supervisor.start_link(args)
   end
 end
 

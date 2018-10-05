@@ -1,8 +1,11 @@
 defmodule Stack.Server do
   use GenServer
 
-  def start_link(list) do
-    GenServer.start_link(__MODULE__, list, name: __MODULE__)
+  #####
+  # 外部 API
+
+  def start_link(stash_pid) do
+    GenServer.start_link(__MODULE__, stash_pid, name: __MODULE__)
   end
 
   def pop do
@@ -11,10 +14,6 @@ defmodule Stack.Server do
 
   def push(value) do
     GenServer.cast(__MODULE__, {:push, value})
-  end
-
-  def handle_call(:pop, _from, [head | tail]) do
-    {:reply, head, tail}
   end
 
   def stop do
@@ -53,7 +52,19 @@ defmodule Stack.Server do
     GenServer.cast(__MODULE__, {:raise, "I've raised!"})
   end
 
-  def handle_cast(request, state) do
+  #####
+  # GenServerの実装
+
+  def init(stash_pid) do
+    current_stack = Stack.Stash.get_stack(stash_pid)
+    {:ok, {current_stack, stash_pid}}
+  end
+
+  def handle_call(:pop, _from, {[head | tail], stash_pid}) do
+    {:reply, head, {tail, stash_pid}}
+  end
+
+  def handle_cast(request, {state, stash_pid}) do
     case request do
       request when is_atom(request) and request == :stop ->
         {:stop, "That's the stop reason!", state}
@@ -66,14 +77,15 @@ defmodule Stack.Server do
       {id, value} when id == :raise ->
         raise value
       {id, value} when id == :push ->
-        {:noreply, [value | state]}
+        {:noreply, {[value | state], stash_pid}}
     end
   end
 
-  def terminate(reason, state) do
+  def terminate(reason, {state, stash_pid}) do
     IO.puts "Here is the terminate callback!"
     IO.puts "Reason: #{inspect reason}"
     IO.puts "State: #{inspect state}"
+    Stack.Stash.save_stack(stash_pid, state)
   end
 end
 
