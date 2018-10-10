@@ -7,4 +7,9 @@ defmodule Stack.ServerTest do
   test "pop the last element" do
     assert pop() == List.first([5, "cat", 9])
   end
+
+  test "push function adds at the bottom of the list" do
+    push("dog")
+    assert pop() == "dog"
+  end
 end
