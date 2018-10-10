@@ -1,8 +1,10 @@
-defmodule StackTest do
+defmodule Stack.ServerTest do
   use ExUnit.Case
-  doctest Stack
+  doctest Stack.Server
 
-  test "greets the world" do
-    assert Stack.hello() == :world
+  import Stack.Server
+
+  test "pop the last element" do
+    assert pop() == List.first([5, "cat", 9])
   end
 end
