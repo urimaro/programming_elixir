@@ -30,7 +30,7 @@
                 "/Users/goh/elixir/programming_elixir/deploy/lib/iex-1.7.3"},
            {sasl,"3.2.1",
                  "/Users/goh/elixir/programming_elixir/deploy/lib/sasl-3.2.1"}],
-          permanent},
+          old},
  {release,"sequence2","0.1.0","10.1",
           [{kernel,"6.1","./lib/kernel-6.1"},
            {stdlib,"3.6","./lib/stdlib-3.6"},
@@ -47,4 +47,4 @@
            {sequence2,"0.1.0","./lib/sequence2-0.1.0"},
            {iex,"1.7.3","./lib/iex-1.7.3"},
            {sasl,"3.2.1","./lib/sasl-3.2.1"}],
-          old}].
+          permanent}].
