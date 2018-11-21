@@ -1,7 +1,7 @@
 defmodule My do
   defmacro macro(code) do
     quote do
-      IO.inspect(code)
+      IO.inspect(unquote(code))
     end
   end
 end
